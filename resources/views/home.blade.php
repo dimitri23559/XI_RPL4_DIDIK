@@ -9,7 +9,7 @@
 </head>
 <body>
     <h1>
-        Halaman home
+        Halaman home ku
     </h1>
     <script src="js/script.js"></script>
 </body>
