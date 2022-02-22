@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -15,13 +16,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::resource('/contacts',ContactController::class);
+
+Auth::routes();
+
+Route::group(['middleware' => ['auth']],function(){
+    Route::get('/home',[App\Http\Controllers::class,'index'])->name('home');
+});
+
 Route::get('/', function () {
-    return view('home',[
+    return view('index',[
         "title" => "home"
     ]);
 });
 Route::get('/about', function () {
-    return view('about',[
+    return view('index',[
         "title" => "about"
     ]);
 });
@@ -37,3 +46,7 @@ Route::resource('/contacts', ContactController::class);
 //         "title" => "contact"
 //     ]);
 // });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
